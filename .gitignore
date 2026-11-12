@@ -1,0 +1,8 @@
+data/raw/
+__pycache__/
+*.pyc
+.pytest_cache/
+models/*.joblib
+results_run.log
+results/test_predictions.npz
+.venv/
