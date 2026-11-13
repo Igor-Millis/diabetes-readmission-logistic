@@ -186,12 +186,13 @@ Code: MIT © Igor Millis.
 ### Resumo em português
 
 Projeto de Machine Learning sobre **readmissão hospitalar em até 30 dias** de pacientes diabéticos
-(99.340 internações, 130 hospitais dos EUA). O dataset é famoso e irregular: alvo raro (11,4%), sinal
-fraco, até 97% de ausência numa coluna, 716 códigos CID-9 e pacientes repetidos.
+(99.340 internações em 130 hospitais dos EUA). A base é famosa e irregular: desfecho raro (11,4%), sinal
+fraco, até 97% de dados ausentes em uma coluna, 716 códigos CID-9 e pacientes que aparecem várias vezes.
 
 A **regressão logística com splines** foi comparada com floresta aleatória, LightGBM e outras variantes
-logísticas em mais de 40 métricas, com validação **por paciente** e bootstrap por paciente. O LightGBM vence
-por pouco (ΔAUC = +0,011, IC 95% [0,006; 0,016]). A logística guarda cerca de 94% do ganho, é bem calibrada
-(slope 1,04, ECE 0,007), é interpretável (odds ratios com erros-padrão clusterizados, IRLS implementado do
-zero) e vence quando há pouco dado. Usar `class_weight="balanced"` mantém a AUC, mas destrói a calibração
-(ECE 0,352). Já o limiar 0,5 não serve para nada com prevalência de 11%.
+logísticas em mais de 40 métricas, com divisão, validação cruzada e bootstrap **por paciente**. O LightGBM
+vence por pouco (ΔAUC = +0,011, IC 95% [0,006; 0,016]). A logística mantém cerca de 94% do ganho sobre o
+acaso, é bem calibrada (inclinação 1,04, ECE 0,007), é interpretável (odds ratios com erros-padrão
+agrupados por paciente, IRLS implementado do zero) e vence quando há poucos dados. Usar
+`class_weight="balanced"` mantém a AUC, mas destrói a calibração (ECE 0,352). Já o limiar de 0,5 é inútil
+com uma prevalência de 11%.
